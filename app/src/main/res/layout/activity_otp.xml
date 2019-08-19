@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.registration.OTPActivity">
+
+
+        <RelativeLayout
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/heading">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/ic_icon_elate"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/login_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_msg"
+                android:layout_below="@id/logo"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="10pt"
+                android:textColor="@color/black"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/otp_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/heading"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/enter_otp"
+            android:textSize="10pt"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+
+        <RelativeLayout
+            android:id="@+id/otp_edittext_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/otp_txt"
+            android:layout_marginTop="20dp">
+
+            <!--<EditText
+                android:id="@+id/edit1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:inputType="numberPassword" />-->
+
+            <LinearLayout
+                android:id="@+id/center_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword" />
+
+                <EditText
+                    android:id="@+id/edit2"
+                    style="@style/PinEditTextStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/edit1"
+                    android:inputType="numberPassword" />
+
+                <EditText
+                    android:id="@+id/edit3"
+                    style="@style/PinEditTextStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword" />
+
+                <EditText
+                    android:id="@+id/edit4"
+                    style="@style/PinEditTextStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberPassword" />
+
+                <EditText
+                    android:id="@+id/edit5"
+                    style="@style/PinEditTextStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="25dp"
+                    android:inputType="numberPassword" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/verify"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/otp_edittext_container"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/verify"
+            style="@style/ButtonStyle"/>
+
+        <TextView
+            android:id="@+id/resend_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verify"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20pt"
+            android:text="@string/resend_otp"/>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+</layout>

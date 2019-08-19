@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="mainHeader"
+            type="com.orangeskill.elate.feature.home.model.MainHeader" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/page_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/main_heading" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/session_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/page_head"
+            android:layout_above="@id/bottom_menu" />
+
+        <include
+            android:id="@+id/progressbar"
+            layout="@layout/progressbar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/home_bottom_menu"
+        android:background="@color/button_color"/>
+
+</RelativeLayout>
+</layout>

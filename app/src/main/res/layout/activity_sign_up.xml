@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.login.ui.login.LoginActivity">
+
+        <RelativeLayout
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/heading">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="20dp"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/ic_icon_elate"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/login_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_msg"
+                android:layout_below="@id/logo"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textSize="10pt"
+                android:textColor="@color/black"/>
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/login_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_notice"
+            android:layout_below="@id/heading"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/country_select"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/login_info"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:background="@color/light_gray"/>
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_below="@id/country_select"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/login_edit_text"
+            android:drawableLeft="@drawable/ic_phone"
+            android:inputType="numberDecimal"
+            android:hint="@string/hint_phone"
+            android:maxLength="12"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_below="@id/phone"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/login_edit_text"
+            android:drawableLeft="@drawable/ic_password"
+            android:inputType="textPassword"
+            android:hint="@string/password" />
+        <EditText
+            android:id="@+id/confirm_password"
+            android:layout_below="@id/password"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/login_edit_text"
+            android:drawableLeft="@drawable/ic_password"
+            android:inputType="textPassword"
+            android:hint="@string/confirm_password" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="@string/submit"
+                style="@style/ButtonStyle"/>
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+</layout>
