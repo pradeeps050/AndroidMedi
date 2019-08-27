@@ -37,6 +37,7 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder>{
             inflater = LayoutInflater.from(viewGroup.getContext());
         }
         SessionListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.session_list_item, viewGroup, false);
+
         return new SessionViewHolder(binding);
     }
 
@@ -47,8 +48,7 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder>{
         sessionViewHolder.binding.mainText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listner.onClickItem(therapies);
-            }
+                listner.onClickItem(therapies); }
         });
 
     }
