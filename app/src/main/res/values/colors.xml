@@ -153,4 +153,9 @@
     <color name="heading">#f4faff</color>
     <color name="heading1">#edf7ff</color>
 
+    <color name="dot_bar1">#6e61a7</color>
+    <color name="dot_bar2">#f3f3f3</color>
+    <color name="dot_bar3">#e81123</color>
+
+
 </resources>
