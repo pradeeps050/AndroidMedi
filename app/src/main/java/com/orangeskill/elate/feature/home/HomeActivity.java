@@ -12,7 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.support.v4.content.ContextCompat;
+import android.widget.TextView;
 
+
+import com.agrawalsuneet.dotsloader.loaders.LinearDotsLoader;
 import com.orangeskill.elate.R;
 import com.orangeskill.elate.databinding.ActivityHomeBinding;
 import com.orangeskill.elate.feature.feed.FeedActivity;
@@ -30,14 +35,19 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
     private HomeViewModel viewModel;
     private HomeAdapter adapter;
     private BottomNavigationView bottomMenu;
+    private TextView txtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        binding.progressBar.setVisibility(View.VISIBLE);
+        //binding.progressBar.setVisibility(View.VISIBLE);
+        binding.dotProgressBar.setVisibility(View.VISIBLE);
+        binding.progressBarMessage.setVisibility(View.VISIBLE);
         loadRecyclerView();
+
 
         binding.bottomMenu.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,7 +80,9 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
         viewModel.getList().observe(this, new Observer<List<TherapyCategory>>() {
             @Override
             public void onChanged(@Nullable List<TherapyCategory> therapyCategories) {
-                binding.progressBar.setVisibility(View.GONE);
+                //binding.progressBar.setVisibility(View.GONE);
+                binding.dotProgressBar.setVisibility(View.GONE);
+                binding.progressBarMessage.setVisibility(View.GONE);
                 if (therapyCategories != null && therapyCategories.size() != 0) {
                     adapter = new HomeAdapter(HomeActivity.this, therapyCategories);
                     binding.homeRecyclerView.setAdapter(adapter);
