@@ -2,6 +2,9 @@ package com.orangeskill.elate.feature.session.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orangeskill.elate.feature.playlist.ui.therapy.data.model.Program;
+
+import java.util.List;
 
 public class Therapies {
 
@@ -37,6 +40,9 @@ public class Therapies {
     @SerializedName("CreatedOn")
     @Expose
     private String createdOn;
+
+    @SerializedName("Program")
+    private List<Program> programs;
 
     public Integer getId() {
         return id;
@@ -110,6 +116,22 @@ public class Therapies {
         this.createdOn = createdOn;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
+    }
+
     @Override
     public String toString() {
         return "Therapies{" +
@@ -122,6 +144,7 @@ public class Therapies {
                 ", isActive=" + isActive +
                 ", createdBy=" + createdBy +
                 ", createdOn='" + createdOn + '\'' +
+                ", programs=" + programs +
                 '}';
     }
 }

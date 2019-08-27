@@ -26,6 +26,10 @@ public class TherapySession {
     @Expose
     private String curatedBy;
 
+    @SerializedName("CuretedByImage")
+    @Expose
+    private String curatedByImage;
+
     @SerializedName("Therapies")
     @Expose
     private List<Therapies> therapies;
@@ -41,6 +45,10 @@ public class TherapySession {
     @SerializedName("CreatedOn")
     @Expose
     private String createdOn;
+
+    @SerializedName("OverView")
+    @Expose
+    private String overview;
 
     public Integer getId() {
         return id;
@@ -122,10 +130,29 @@ public class TherapySession {
                 ", thumbnailPath='" + thumbnailPath + '\'' +
                 ", description='" + description + '\'' +
                 ", curatedBy='" + curatedBy + '\'' +
+                ", curatedByImage='" + curatedByImage + '\'' +
                 ", therapies=" + therapies +
                 ", isActive=" + isActive +
                 ", createdBy='" + createdBy + '\'' +
                 ", createdOn='" + createdOn + '\'' +
+                ", overview='" + overview + '\'' +
                 '}';
     }
+
+    public String getCuratedByImage() {
+        return curatedByImage;
+    }
+
+    public void setCuratedByImage(String curatedByImage) {
+        this.curatedByImage = curatedByImage;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
 }

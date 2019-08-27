@@ -23,22 +23,25 @@
         <!--android:src="@drawable/image_border"-->
 
         
-        <android.support.v7.widget.RecyclerView
+        <!--<android.support.v7.widget.RecyclerView
             android:id="@+id/session_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/page_head"
             android:layout_above="@id/bottom_menu"
+            android:visibility="visible"/>-->
+
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+            android:layout_below="@id/page_head"
+            android:layout_above="@id/bottom_menu"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp"
             android:visibility="gone"/>
 
-      <!--  <ExpandableListView
-            android:id="@+id/session_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/page_head"
-            android:layout_above="@id/bottom_menu">
-
-        </ExpandableListView>-->
 
         <include
             android:id="@+id/progressbar"
