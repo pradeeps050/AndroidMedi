@@ -22,6 +22,7 @@ import retrofit2.http.Url;
 public interface RestApi {
     String API_BASE_URL = "http://3.220.157.39:90/api/"; //"http://3.220.157.39:91"
 
+
     @FormUrlEncoded
     @POST("Register")
     Call<SignUpResponse> register(@Field("Mobile") String mobile,
@@ -37,7 +38,7 @@ public interface RestApi {
     @GET("TherapyCategory")
     Call<List<TherapyCategory>> therapyCategory();
 
-    @GET("TherapyCategory/{Id}")
+    @GET("TherpyCategory/{Id}")
     Call<TherapySession> loadTherapySession(@Path("Id") int id);
 
     @GET("Therapy/{Id}")
