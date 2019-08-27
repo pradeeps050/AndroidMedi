@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -21,6 +25,8 @@ import com.orangeskill.elate.feature.session.model.Therapies;
 import com.orangeskill.elate.feature.session.model.TherapySession;
 import com.orangeskill.elate.framework.constantsValues.ConstantValues;
 import com.orangeskill.elate.framework.logger.Logger;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +43,36 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     private String curatedBy;
     private String name;
     private MainHeader mainHeader;
+    private TextView overviewText;
+    private RecyclerView listOfTherapies;
+    private ImageView rightArrow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         catId = getIntent().getIntExtra(ConstantValues.THERAPY_CAT_ID, 0);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_session);
-        viewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
+        overviewText = (TextView) findViewById(R.id.tv_overview2);
+        listOfTherapies= findViewById(R.id.session_recycler_view);
+
+        binding.pageHead.tvOverview.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                binding.pageHead.imageOverview.setImageResource(R.drawable.ic_down_side_arrow_button);
+                overviewText.setVisibility((overviewText.getVisibility()==View.VISIBLE)? View.GONE:View.VISIBLE);
+            }
+        });
+        binding.pageHead.tvSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.pageHead.imageSchedule.setImageResource(R.drawable.ic_down_side_arrow_button);
+                listOfTherapies.setVisibility((listOfTherapies.getVisibility()==View.VISIBLE? View.GONE:View.VISIBLE));
+            }
+        });
+
+         viewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
         initRecyclerView();
         binding.pageHead.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,13 +80,16 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                 onBackPressed();
             }
         });
+
     }
 
     private void initRecyclerView(){
 
         viewModel.getSession(catId);
         binding.progressbar.setVisibility(View.VISIBLE);
+
         binding.sessionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         viewModel.getSessionLiveData().observe(this, new Observer<TherapySession>() {
             @Override
             public void onChanged(@Nullable TherapySession therapySessions) {
