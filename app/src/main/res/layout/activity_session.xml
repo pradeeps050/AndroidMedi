@@ -11,14 +11,47 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <!--<android.support.design.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/page_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|snap|enterAlways"
+                    layout="@layout/main_heading"/>
+
+                <ExpandableListView
+                    android:id="@+id/expandableListView"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/page_head"
+                    android:layout_above="@id/bottom_menu"
+                    android:dividerHeight="0.5dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:visibility="visible"/>
+
+
+            </android.support.design.widget.AppBarLayout>
+
+        </android.support.design.widget.CoordinatorLayout>-->
 
         <include
             android:id="@+id/page_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
+            app:layout_scrollFlags="scroll|snap|enterAlways"
             layout="@layout/main_heading"/>
         <!--android:src="@drawable/image_border"-->
 
@@ -35,12 +68,11 @@
             android:id="@+id/expandableListView"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
             android:layout_below="@id/page_head"
             android:layout_above="@id/bottom_menu"
-            android:divider="@android:color/darker_gray"
             android:dividerHeight="0.5dp"
-            android:visibility="gone"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:visibility="visible"/>
 
 
         <include

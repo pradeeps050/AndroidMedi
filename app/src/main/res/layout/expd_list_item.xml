@@ -17,14 +17,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Subtitle"/>
+            android:layout_marginLeft="10dp"
+            android:text="Subtitle"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_icon_play"
-            android:layout_alignParentRight="true"/>
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
 
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
 
 
     </RelativeLayout>

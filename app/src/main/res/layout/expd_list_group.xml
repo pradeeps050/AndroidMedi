@@ -6,17 +6,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/listTitle"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:textColor="@android:color/black"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="Title"/>
+
+        <TextView
+            android:id="@+id/session_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 Session"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/button_color"/>
 
     </LinearLayout>
 </layout>

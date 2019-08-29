@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ProgressBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.agrawalsuneet.dotsloader.loaders.LinearDotsLoader xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/progressbar"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:text="@string/loading"
+    app:loader_animDur="1000"
+    app:loader_circleRadius="6dp"
+    app:loader_defaultColor="@color/dot_bar1"
+    app:loader_dotsDist="4dp"
+    app:loader_expandOnSelect="false"
+    app:loader_firstShadowColor="@color/dot_bar2"
+    app:loader_isSingleDir="false"
+    app:loader_noOfDots="8"
+    app:loader_secondShadowColor="@color/dot_bar2"
+    app:loader_selectedColor="@color/blue"
+    app:loader_selectedRadius="10dp"
     android:layout_gravity="center"
-    android:visibility="gone">
-
-</ProgressBar>
+    app:loader_showRunningShadow="true">
+</com.agrawalsuneet.dotsloader.loaders.LinearDotsLoader>
