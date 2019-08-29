@@ -4,6 +4,10 @@ package com.orangeskill.elate.framework.preference;
 
 public interface IPrefrenceHelperKeys {
 
+    // Shared preferences file name
+    String PREF_NAME = "Welcome";
+    String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
     String PREFS_FILE_NAME = "Windstream_prefrence_file";
 
     String PREFS_BILLING_SUMMARY_ACCOUNT = "PREFS_BILLING_SUMMARY_ACCOUNT";

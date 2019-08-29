@@ -23,8 +23,11 @@ import com.orangeskill.elate.databinding.ActivityHomeBinding;
 import com.orangeskill.elate.feature.feed.FeedActivity;
 import com.orangeskill.elate.feature.home.model.TherapyCategory;
 import com.orangeskill.elate.feature.session.SessionActivity;
+import com.orangeskill.elate.feature.welcomeslide.WelcomeActivity;
+import com.orangeskill.elate.framework.application.AppInstance;
 import com.orangeskill.elate.framework.constantsValues.ConstantValues;
 import com.orangeskill.elate.framework.logger.Logger;
+import com.orangeskill.elate.framework.preference.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +47,14 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         //binding.progressBar.setVisibility(View.VISIBLE);
+        PreferenceHelper preferenceHelper = PreferenceHelper.getAppPrefs(AppInstance.getInstance().getContext());
+        if (preferenceHelper.isFirstTimeLaunch()) {
+            preferenceHelper.setFirstTimeLaunch(false);
+            startActivity(new Intent(HomeActivity.this, WelcomeActivity.class));
+            finish();
+        }
         binding.dotProgressBar.setVisibility(View.VISIBLE);
-        binding.progressBarMessage.setVisibility(View.VISIBLE);
+        //binding.progressBarMessage.setVisibility(View.VISIBLE);
         loadRecyclerView();
 
 
@@ -56,6 +65,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
                                 Logger.d(TAG, ">> home");
+                                loadRecyclerView();
                                 break;
                             case R.id.nav_feed:
                                 Logger.d(TAG, ">> feed");
@@ -82,7 +92,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
             public void onChanged(@Nullable List<TherapyCategory> therapyCategories) {
                 //binding.progressBar.setVisibility(View.GONE);
                 binding.dotProgressBar.setVisibility(View.GONE);
-                binding.progressBarMessage.setVisibility(View.GONE);
+                //binding.progressBarMessage.setVisibility(View.GONE);
                 if (therapyCategories != null && therapyCategories.size() != 0) {
                     adapter = new HomeAdapter(HomeActivity.this, therapyCategories);
                     binding.homeRecyclerView.setAdapter(adapter);

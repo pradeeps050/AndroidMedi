@@ -6,9 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.orangeskill.elate.framework.constantsValues.ConstantValues;
+
 import java.util.Objects;
 import java.util.Set;
 
+import static com.orangeskill.elate.framework.preference.IPrefrenceHelperKeys.IS_FIRST_TIME_LAUNCH;
 
 
 public class PreferenceHelper {
@@ -95,6 +98,16 @@ public class PreferenceHelper {
 
     public boolean getBooleanValue(String key) {
         return Objects.requireNonNull(preferences).getBoolean(key, false);
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        SharedPreferences.Editor editor = Objects.requireNonNull(preferences).edit();
+        editor.putBoolean(IPrefrenceHelperKeys.IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return Objects.requireNonNull(preferences).getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
 

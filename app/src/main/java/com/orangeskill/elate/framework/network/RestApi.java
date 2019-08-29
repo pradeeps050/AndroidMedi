@@ -38,7 +38,7 @@ public interface RestApi {
     @GET("TherapyCategory")
     Call<List<TherapyCategory>> therapyCategory();
 
-    @GET("TherpyCategory/{Id}")
+    @GET("TherapyCategory/{Id}")
     Call<TherapySession> loadTherapySession(@Path("Id") int id);
 
     @GET("Therapy/{Id}")
