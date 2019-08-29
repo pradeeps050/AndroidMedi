@@ -59,4 +59,25 @@
 
     <string name="category">Category</string>
     <string name="profile">Profile</string>
+
+    <string name="slide1">A happier and healthier you!</string>
+    <string name="slide1_para">Yoga, Meditation\n Nutrition and Sleep.</string>
+
+    <string name="slide2">Meditation</string>
+    <string name="slide2_para">Learn the most effictive \n methods to do meditation.</string>
+
+    <string name="slide3">Yoga</string>
+    <string name="slide3_para">Curated program to\n improve physical health.</string>
+
+    <string name="slide4">Nutrition</string>
+    <string name="slide4_para">Foods which are good\n for mind and body.</string>
+
+    <string name="next">Lets get started</string>
+    <string name="skip"><b><u>skip</u></b></string>
+    <string name="start">GOT IT</string>
+
+    <string name="text_with_bullet1">\u2022 \u25CB \u25CB \u25CB</string>
+    <string name="text_with_bullet2"> \u25CB \u2022 \u25CB \u25CB</string>
+    <string name="text_with_bullet3"> \u25CB \u25CB \u2022 \u25CB</string>
+    <string name="text_with_bullet4"> \u25CB \u25CB \u25CB \u2022</string>
 </resources>
