@@ -4,34 +4,30 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
 import com.orangeskill.elate.R;
 import com.orangeskill.elate.databinding.ActivitySessionBinding;
+import com.orangeskill.elate.feature.MediaActivity;
 import com.orangeskill.elate.feature.home.model.MainHeader;
 import com.orangeskill.elate.feature.playlist.ui.therapy.PlayListActivity;
 import com.orangeskill.elate.feature.playlist.ui.therapy.data.model.Program;
 import com.orangeskill.elate.feature.session.data.ExpdListDataSource;
 import com.orangeskill.elate.feature.session.model.Therapies;
 import com.orangeskill.elate.feature.session.model.TherapySession;
+import com.orangeskill.elate.feature.video.VideoActivity;
 import com.orangeskill.elate.framework.constantsValues.ConstantValues;
 import com.orangeskill.elate.framework.logger.Logger;
 
-import org.w3c.dom.Text;
-
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,13 +48,13 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     private MainHeader mainHeader;
     private TextView overviewText;
     private RecyclerView listOfTherapies;
-    private ImageView rightArrow;
-    private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
     private ExpdListAdapter adapter;
     private boolean flag = true;
     private String overView;
     private boolean overviewFlag = true;
+    private HashMap<ExpdListDataSource.Group, List<Program>> map;
+    private ArrayList<ExpdListDataSource.Group> groupArrayList;
+    private TherapySession therapySessions;
 
 
     @Override
@@ -71,31 +67,33 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
         //listOfTherapies= findViewById(R.id.session_recycler_view);
         initRecyclerView();
 
-        binding.pageHead.tvOverview.setOnClickListener(new View.OnClickListener() {
+        binding.pageHead.overviewContainer.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                binding.pageHead.imageOverview.setImageResource(R.drawable.ic_down_side_arrow_button);
-                binding.pageHead.tvOverview2.setText(overView);
+                binding.pageHead.tvOverviewDesc.setText(overView);
                 if (overviewFlag) {
-                    binding.pageHead.tvOverview2.setVisibility(View.VISIBLE);
+                    binding.pageHead.tvOverviewDesc.setVisibility(View.VISIBLE);
+                    binding.pageHead.imageOverview.setImageResource(R.drawable.ic_down_side_arrow_button);
                     overviewFlag = false;
                 } else {
-                    binding.pageHead.tvOverview2.setVisibility(View.GONE);
+                    binding.pageHead.tvOverviewDesc.setVisibility(View.GONE);
+                    binding.pageHead.imageOverview.setImageResource(R.drawable.ic_right_side_arrow_button);
                     overviewFlag = true;
                 }
 
             }
         });
-        binding.pageHead.tvSchedule.setOnClickListener(new View.OnClickListener() {
+        binding.pageHead.scheduleContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flag) {
-                    //initRecyclerView();
                     binding.expandableListView.setVisibility(View.VISIBLE);
+                    binding.pageHead.imageSchedule.setImageResource(R.drawable.ic_down_side_arrow_button);
                     flag = false;
                 } else {
                     binding.expandableListView.setVisibility(View.GONE);
+                    binding.pageHead.imageSchedule.setImageResource(R.drawable.ic_right_side_arrow_button);
                     flag = true;
                 }
                 //binding.pageHead.imageSchedule.setImageResource(R.drawable.ic_down_side_arrow_button);
@@ -114,6 +112,7 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
             }
         });
 
+
     }
 
     private void initRecyclerView(){
@@ -126,6 +125,7 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
             public void onChanged(@Nullable TherapySession therapySessions) {
                 binding.progressbar.setVisibility(View.GONE);
                 if (therapySessions!= null) {
+                    SessionActivity.this.therapySessions = therapySessions;
                     name = therapySessions.getName();
                     imageUrl = therapySessions.getThumbnailPath();
                     curatedBy = therapySessions.getCuratedBy();
@@ -139,20 +139,20 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                     //binding.pageHead.tvOverview.setText(therapySessions.getOverview());
                     binding.pageHead.setMainHeader(mainHeader);
 
-                    //Glide.with(SessionActivity.this).load(imageUrl).into(binding.heading.mainImage);
+                    Glide.with(SessionActivity.this).load(therapySessions.getCuratedByImage()).into(binding.pageHead.profileImage);
                     //binding.heading.nameText.setText(therapySessions.getName());
                     description = therapySessions.getDescription();
                     //binding.heading.noteText.setText(description);
                     //binding.heading.curatedByTxt.setText(curatedBy);
                     List<Therapies> therapies = therapySessions.getTherapies();
                     ExpdListDataSource expdListDataSource = new ExpdListDataSource();
-                    HashMap<ExpdListDataSource.Group, List<Program>> map = expdListDataSource.setListData(therapies);
+                    map = expdListDataSource.setListData(therapies);
                     //ArrayList<Group> titleList = new ArrayList<Group>(map.keySet());
                     Set<ExpdListDataSource.Group> titleSet =  map.keySet();
 
                     //ExpdListDataSource.Group[] groups = (ExpdListDataSource.Group[]) titleSet.toArray();
                     Iterator<ExpdListDataSource.Group> iterator = titleSet.iterator();
-                    ArrayList<ExpdListDataSource.Group> groupArrayList = new ArrayList<ExpdListDataSource.Group>();
+                    groupArrayList = new ArrayList<ExpdListDataSource.Group>();
                     while (iterator.hasNext()) {
                         groupArrayList.add(iterator.next());
                     }
@@ -170,8 +170,33 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
             }
         });
 
+        binding.expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
+                Program program = map.get(groupArrayList.get(groupPosition)).get(childPosition);
+                Logger.d(TAG, "Program >> " + program.toString());
+                String uri = program.getUrl();
+                String extension = uri.substring(uri.lastIndexOf("."));
+                Logger.d(TAG, " EXt >> " + extension);
+                if (".gif".equals(extension) || ".pdf".equals(extension)) {
+                    //Intent intent = new Intent(SessionActivity.this, MediaActivity.class);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(program.getUrl()));
+                    browserIntent.setClass(SessionActivity.this, MediaActivity.class);
 
+                    browserIntent.putExtra("url", program.getUrl());
+                    startActivity(browserIntent);
+                } else if (".mp4".equals(extension)) {
+                    Intent intent = new Intent(SessionActivity.this, VideoActivity.class);
+                    intent.putExtra(ConstantValues.VIDEO_LINK, program.getUrl());
+                    intent.putExtra(ConstantValues.VIDEO_NAME, program.getName());
+                    intent.putExtra(ConstantValues.SUBCATEGORY, therapySessions.getTherapies().get(groupPosition).getSubCatagoryName());
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
     }
+
 
 
     @Override

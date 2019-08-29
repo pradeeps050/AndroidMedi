@@ -79,8 +79,10 @@ public class ExpdListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.expd_list_group, null);
         }
         TextView listTitleTextView = (TextView) convertView.findViewById(R.id.listTitle);
+        TextView sessionText = convertView.findViewById(R.id.session_txt);
         listTitleTextView.setTypeface(null, Typeface.BOLD);
-        listTitleTextView.setText(group.title + " " + String.valueOf(group.size) + " Session");
+        listTitleTextView.setText(group.title);
+        sessionText.setText(String.valueOf(group.size + " Session"));
         return convertView;
     }
 
