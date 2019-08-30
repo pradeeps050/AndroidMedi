@@ -178,12 +178,11 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                 String uri = program.getUrl();
                 String extension = uri.substring(uri.lastIndexOf("."));
                 Logger.d(TAG, " EXt >> " + extension);
-                if (".gif".equals(extension) || ".pdf".equals(extension)) {
-                    //Intent intent = new Intent(SessionActivity.this, MediaActivity.class);
+                if (ConstantValues.GIF.equals(extension) || ConstantValues.PDF.equals(extension)) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(program.getUrl()));
                     browserIntent.setClass(SessionActivity.this, MediaActivity.class);
-
-                    browserIntent.putExtra("url", program.getUrl());
+                    browserIntent.putExtra(ConstantValues.FILE_URL, program.getUrl());
+                    browserIntent.putExtra(ConstantValues.EXTENSION, extension);
                     startActivity(browserIntent);
                 } else if (".mp4".equals(extension)) {
                     Intent intent = new Intent(SessionActivity.this, VideoActivity.class);
