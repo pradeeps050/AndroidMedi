@@ -126,6 +126,7 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                     mainHeader = new MainHeader(imageUrl, name, "", para, curatedBy, 0);
                     overView = therapySessions.getOverview();
                     binding.pageHead.setMainHeader(mainHeader);
+                    binding.pageHead.nameText.setText(name);
                     Glide.with(SessionActivity.this).load(therapySessions.getCuratedByImage()).into(binding.pageHead.profileImage);
                     description = therapySessions.getDescription();
                     List<Therapies> therapies = therapySessions.getTherapies();
