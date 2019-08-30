@@ -38,8 +38,6 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     private static final String TAG = SessionActivity.class.getSimpleName();
     private ActivitySessionBinding binding;
     private SessionViewModel viewModel;
-    //private SessionAdapter adapter;
-    private ArrayList<TherapySession> list;
     private int catId = 0;
     private String description;
     private String imageUrl;
@@ -47,8 +45,6 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     private String name;
     private MainHeader mainHeader;
     private TextView overviewText;
-    private RecyclerView listOfTherapies;
-    private ExpdListAdapter adapter;
     private boolean flag = true;
     private String overView;
     private boolean overviewFlag = true;
@@ -62,9 +58,11 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
         super.onCreate(savedInstanceState);
         catId = getIntent().getIntExtra(ConstantValues.THERAPY_CAT_ID, 0);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_session);
+        binding.pageHead.mainRelative.setVisibility(View.GONE);
+        binding.bottomMenu.setVisibility(View.GONE);
+        binding.progressbar.setVisibility(View.VISIBLE);
         viewModel = ViewModelProviders.of(this).get(SessionViewModel.class);
-        overviewText = (TextView) findViewById(R.id.tv_overview2);
-        //listOfTherapies= findViewById(R.id.session_recycler_view);
+        overviewText = findViewById(R.id.tv_overview2);
         initRecyclerView();
 
         binding.pageHead.overviewContainer.setOnClickListener(new View.OnClickListener() {
@@ -96,10 +94,6 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                     binding.pageHead.imageSchedule.setImageResource(R.drawable.ic_right_side_arrow_button);
                     flag = true;
                 }
-                //binding.pageHead.imageSchedule.setImageResource(R.drawable.ic_down_side_arrow_button);
-                //initRecyclerView();
-                //binding.expandableListView.setVisibility(View.VISIBLE);
-                //listOfTherapies.setVisibility((listOfTherapies.getVisibility()==View.VISIBLE? View.GONE:View.VISIBLE));
             }
         });
 
@@ -116,14 +110,13 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     }
 
     private void initRecyclerView(){
-
         viewModel.getSession(catId);
-        binding.progressbar.setVisibility(View.VISIBLE);
-
         viewModel.getSessionLiveData().observe(this, new Observer<TherapySession>() {
             @Override
             public void onChanged(@Nullable TherapySession therapySessions) {
                 binding.progressbar.setVisibility(View.GONE);
+                binding.pageHead.mainRelative.setVisibility(View.VISIBLE);
+                binding.bottomMenu.setVisibility(View.VISIBLE);
                 if (therapySessions!= null) {
                     SessionActivity.this.therapySessions = therapySessions;
                     name = therapySessions.getName();
@@ -131,41 +124,21 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                     curatedBy = therapySessions.getCuratedBy();
                     String para = therapySessions.getDescription();
                     mainHeader = new MainHeader(imageUrl, name, "", para, curatedBy, 0);
-//                    mainHeader.setImageUrl(therapySessions.getThumbnailPath());
-//                    mainHeader.setName(therapySessions.getName());
-//                    mainHeader.setNote(therapySessions.getDescription());
-//                    mainHeader.setCuratedBy(therapySessions.getCuratedBy());
                     overView = therapySessions.getOverview();
-                    //binding.pageHead.tvOverview.setText(therapySessions.getOverview());
                     binding.pageHead.setMainHeader(mainHeader);
-
                     Glide.with(SessionActivity.this).load(therapySessions.getCuratedByImage()).into(binding.pageHead.profileImage);
-                    //binding.heading.nameText.setText(therapySessions.getName());
                     description = therapySessions.getDescription();
-                    //binding.heading.noteText.setText(description);
-                    //binding.heading.curatedByTxt.setText(curatedBy);
                     List<Therapies> therapies = therapySessions.getTherapies();
                     ExpdListDataSource expdListDataSource = new ExpdListDataSource();
                     map = expdListDataSource.setListData(therapies);
-                    //ArrayList<Group> titleList = new ArrayList<Group>(map.keySet());
                     Set<ExpdListDataSource.Group> titleSet =  map.keySet();
-
-                    //ExpdListDataSource.Group[] groups = (ExpdListDataSource.Group[]) titleSet.toArray();
                     Iterator<ExpdListDataSource.Group> iterator = titleSet.iterator();
                     groupArrayList = new ArrayList<ExpdListDataSource.Group>();
                     while (iterator.hasNext()) {
                         groupArrayList.add(iterator.next());
                     }
-
                     ExpdListAdapter adapter = new ExpdListAdapter(SessionActivity.this, groupArrayList, map);
                     binding.expandableListView.setAdapter(adapter);
-
-
-
-
-                    //adapter = new SessionAdapter(SessionActivity.this, therapies);
-                    //binding.sessionRecyclerView.setAdapter(adapter);
-                    //adapter.setClickListner(SessionActivity.this);
                 }
             }
         });
@@ -207,12 +180,6 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
         mainHeader.setSubCategory(therapies.getSubCatagoryName());
         mainHeader.setId(id);
         intent.putExtra("key", mainHeader);
-//        intent.putExtra(ConstantValues.PROGRAM_ID, id);
-//        intent.putExtra(ConstantValues.DESCRIPTION, description);
-//        intent.putExtra(ConstantValues.SUBCATEGORY, therapies.getSubCatagoryName());
-//        intent.putExtra(ConstantValues.CURATED_BY, curatedBy);
-//        intent.putExtra(ConstantValues.IMAGE_URL, imageUrl);
-//        intent.putExtra(ConstantValues.NAME, name);
         startActivity(intent);
     }
 
@@ -220,4 +187,6 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 }
