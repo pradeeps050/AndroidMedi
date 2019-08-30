@@ -15,37 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<android.support.design.widget.CoordinatorLayout
-            android:id="@+id/coordinator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include
-                    android:id="@+id/page_head"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|snap|enterAlways"
-                    layout="@layout/main_heading"/>
-
-                <ExpandableListView
-                    android:id="@+id/expandableListView"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:layout_below="@id/page_head"
-                    android:layout_above="@id/bottom_menu"
-                    android:dividerHeight="0.5dp"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    android:visibility="visible"/>
-
-
-            </android.support.design.widget.AppBarLayout>
-
-        </android.support.design.widget.CoordinatorLayout>-->
-
         <include
             android:id="@+id/page_head"
             android:layout_width="match_parent"
@@ -53,16 +22,6 @@
             android:scaleType="fitXY"
             app:layout_scrollFlags="scroll|snap|enterAlways"
             layout="@layout/main_heading"/>
-        <!--android:src="@drawable/image_border"-->
-
-        
-        <!--<android.support.v7.widget.RecyclerView
-            android:id="@+id/session_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/page_head"
-            android:layout_above="@id/bottom_menu"
-            android:visibility="visible"/>-->
 
         <ExpandableListView
             android:id="@+id/expandableListView"
@@ -72,7 +31,7 @@
             android:layout_above="@id/bottom_menu"
             android:dividerHeight="0.5dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
 
         <include
