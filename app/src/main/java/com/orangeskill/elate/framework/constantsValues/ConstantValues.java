@@ -19,5 +19,9 @@ public interface ConstantValues {
     String NAME = "Name";
     String VIDEO_LINK = "VideoLink";
     String VIDEO_NAME = "VideoName";
+    String EXTENSION = "Extension";
+    String PDF = ".pdf";
+    String GIF = ".gif";
+    String FILE_URL = "FileUrl";
 
 }
