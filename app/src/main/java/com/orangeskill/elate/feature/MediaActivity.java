@@ -31,6 +31,7 @@ public class MediaActivity extends AppCompatActivity {
         binding.mediaWebView.getSettings().setJavaScriptEnabled(true);
         binding.mediaWebView.getSettings().setLoadWithOverviewMode(true);
         binding.mediaWebView.getSettings().setUseWideViewPort(true);
+        binding.mediaWebView.getSettings().setBuiltInZoomControls(true);
         if (ConstantValues.PDF.equals(extension)) {
             url = link + url;
             binding.mediaWebView.setWebViewClient(new WebViewClient() {
