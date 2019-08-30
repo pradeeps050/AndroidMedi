@@ -38,8 +38,7 @@ public class FeedActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        startActivity(new Intent(FeedActivity.this, HomeActivity.class));
-                        finish();
+                        onBackPressed();
                         break;
                     case R.id.nav_feed:
                         break;
