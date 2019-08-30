@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -18,6 +21,8 @@ import com.bumptech.glide.Glide;
 import com.orangeskill.elate.R;
 import com.orangeskill.elate.databinding.ActivitySessionBinding;
 import com.orangeskill.elate.feature.MediaActivity;
+import com.orangeskill.elate.feature.feed.FeedActivity;
+import com.orangeskill.elate.feature.home.HomeActivity;
 import com.orangeskill.elate.feature.home.model.MainHeader;
 import com.orangeskill.elate.feature.playlist.ui.therapy.PlayListActivity;
 import com.orangeskill.elate.feature.playlist.ui.therapy.data.model.Program;
@@ -105,7 +110,24 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                 onBackPressed();
             }
         });
-
+        binding.bottomMenu.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_home:
+                                initRecyclerView();
+                                break;
+                            case R.id.nav_feed:
+                                startActivity(new Intent(SessionActivity.this, FeedActivity.class));
+                                break;
+                            case R.id.profile_menu:
+                                break;
+                        }
+                        return true;
+                    }
+                }
+        );
 
     }
 

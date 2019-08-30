@@ -16,31 +16,24 @@
             android:layout_height="match_parent"
             android:layout_above="@id/btn_next" />
 
-        <!--<LinearLayout
-            android:id="@+id/layoutDots"
+        <LinearLayout
+            android:id="@+id/dots"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:orientation="horizontal"/>-->
-
-
-        <!--<View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:alpha=".5"
-            android:layout_above="@id/layoutDots"
-            android:background="@color/white" />-->
+            android:orientation="horizontal"/>
 
         <Button
             android:id="@+id/btn_next"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:visibility="gone"
-            android:background="@null"
+            android:visibility="visible"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/welcome_round_button"
             android:text="@string/next"/>
 
         <Button
@@ -50,7 +43,8 @@
             android:layout_alignParentRight="true"
             android:background="@null"
             android:textColor="@color/black"
-            android:paddingRight="20dp" />
+            android:paddingRight="20dp"
+            android:text="@string/skip"/>
 
     </RelativeLayout>
 </layout>

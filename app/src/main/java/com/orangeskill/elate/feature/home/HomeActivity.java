@@ -66,7 +66,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
                                 break;
                             case R.id.nav_feed:
                                 startActivity(new Intent(HomeActivity.this, FeedActivity.class));
-                                finish();
                                 break;
                             case R.id.profile_menu:
                                 break;

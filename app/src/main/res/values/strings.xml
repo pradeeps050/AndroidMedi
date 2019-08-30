@@ -73,7 +73,7 @@
     <string name="slide4_para">Foods which are good\n for mind and body.</string>
 
     <string name="next">Lets get started</string>
-    <string name="skip"><b><u>skip</u></b></string>
+    <string name="skip"><u>skip</u></string>
     <string name="start">GOT IT</string>
 
     <string name="text_with_bullet1">\u2022 \u25CB \u25CB \u25CB</string>
