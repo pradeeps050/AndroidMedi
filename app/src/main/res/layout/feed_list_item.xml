@@ -18,13 +18,15 @@
         <ImageView
             android:id="@+id/corner_img"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_icon_elate"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:layout_toRightOf="@id/corner_img"
             android:layout_marginLeft="30dp"/>
 
@@ -32,7 +34,7 @@
             android:id="@+id/feed_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_icon_elate"
+            android:layout_marginTop="20dp"
             android:layout_below="@id/title"/>
 
         <TextView
@@ -40,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
             android:layout_below="@id/feed_image"/>
 
     </RelativeLayout>

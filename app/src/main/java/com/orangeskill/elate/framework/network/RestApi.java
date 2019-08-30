@@ -1,6 +1,7 @@
 package com.orangeskill.elate.framework.network;
 
 
+import com.orangeskill.elate.feature.feed.data.model.Feed;
 import com.orangeskill.elate.feature.home.model.Therapy;
 import com.orangeskill.elate.feature.home.model.TherapyCategory;
 import com.orangeskill.elate.feature.playlist.ui.therapy.data.model.PlayList;
@@ -43,6 +44,9 @@ public interface RestApi {
 
     @GET("Therapy/{Id}")
     Call<PlayList> getPlayList(@Path("Id") int id);
+
+    @GET("Feed")
+    Call<List<Feed>> getFeed();
 
 
 
