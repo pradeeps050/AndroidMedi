@@ -43,10 +43,10 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        //binding.progressBar.setVisibility(View.VISIBLE);
+        binding.heading.setVisibility(View.GONE);
+        binding.bottomMenu.setVisibility(View.GONE);
         PreferenceHelper preferenceHelper = PreferenceHelper.getAppPrefs(AppInstance.getInstance().getContext());
         if (preferenceHelper.isFirstTimeLaunch()) {
             preferenceHelper.setFirstTimeLaunch(false);
@@ -54,9 +54,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
             finish();
         }
         binding.dotProgressBar.setVisibility(View.VISIBLE);
-        //binding.progressBarMessage.setVisibility(View.VISIBLE);
         loadRecyclerView();
-
 
         binding.bottomMenu.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,16 +62,13 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
-                                Logger.d(TAG, ">> home");
                                 loadRecyclerView();
                                 break;
                             case R.id.nav_feed:
-                                Logger.d(TAG, ">> feed");
                                 startActivity(new Intent(HomeActivity.this, FeedActivity.class));
 
                                 break;
                             case R.id.profile_menu:
-                                Logger.d(TAG, ">> profile");
                                 break;
                         }
                         return true;
@@ -85,14 +80,13 @@ public class HomeActivity extends AppCompatActivity implements OnItemClick {
     private void loadRecyclerView() {
         viewModel.load();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        //gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.homeRecyclerView.setLayoutManager(gridLayoutManager);
         viewModel.getList().observe(this, new Observer<List<TherapyCategory>>() {
             @Override
             public void onChanged(@Nullable List<TherapyCategory> therapyCategories) {
-                //binding.progressBar.setVisibility(View.GONE);
                 binding.dotProgressBar.setVisibility(View.GONE);
-                //binding.progressBarMessage.setVisibility(View.GONE);
+                binding.heading.setVisibility(View.VISIBLE);
+                binding.bottomMenu.setVisibility(View.VISIBLE);
                 if (therapyCategories != null && therapyCategories.size() != 0) {
                     adapter = new HomeAdapter(HomeActivity.this, therapyCategories);
                     binding.homeRecyclerView.setAdapter(adapter);
