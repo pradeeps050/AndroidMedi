@@ -19,7 +19,7 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="30dp">
 
-                <VideoView
+                <com.orangeskill.elate.feature.video.ui.CustomVideoView
                     android:id="@+id/video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -8,14 +8,18 @@ import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.media.MediaPlayer;
+import android.media.PlaybackParams;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.util.TimeUtils;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,17 +29,21 @@ import android.widget.VideoView;
 
 import com.orangeskill.elate.R;
 import com.orangeskill.elate.databinding.ActivityVideoBinding;
+import com.orangeskill.elate.feature.feed.FeedActivity;
+import com.orangeskill.elate.feature.session.SessionActivity;
 import com.orangeskill.elate.feature.video.ui.CustomMediaController;
+import com.orangeskill.elate.feature.video.ui.CustomVideoView;
 import com.orangeskill.elate.framework.constantsValues.ConstantValues;
 import com.orangeskill.elate.framework.logger.Logger;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class VideoActivity extends Activity implements CustomMediaController.FullScreen {
 
     private static final String TAG = VideoActivity.class.getSimpleName();
     private ActivityVideoBinding binding;
-    private VideoView videoView;
+    private CustomVideoView videoView;
     private MediaController mediaController;
     final int REQUEST_CODE = 5000;
     private BottomNavigationView bottomNavigationView;  //"https://www.radiantmediaplayer.com/media/bbb-360p.mp4";
@@ -43,19 +51,47 @@ public class VideoActivity extends Activity implements CustomMediaController.Ful
     private String videoName;
     private String subCat;
     private  Intent intent;
+    private boolean isComplete = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         intent = getIntent();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_video);
-        videoView = binding.video;
+        videoView = findViewById(R.id.video);
         bottomNavigationView = binding.bottomMenu;
         binding.videoName.setText(intent.getStringExtra(ConstantValues.VIDEO_NAME));
         binding.subCatText.setText(intent.getStringExtra(ConstantValues.SUBCATEGORY));
         mediaController = new MediaController(this);
         //mediaController.setToggle(this::clicked);
         loadPlayer();
+        videoView.setPlayPauseListener(new CustomVideoView.PlayPauseListener() {
+            @Override
+            public void onPlay() {
+                Logger.d(TAG, " >> play");
+                if (isComplete) {
+                    videoView.start();
+                }
+
+            }
+
+            @Override
+            public void onPause() {
+                Logger.d(TAG, " >> onpause");
+                //loadPlayer();
+
+            }
+
+        });
+
+        //videoView.start();
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                Logger.d(TAG, " >> onCompletion");
+                isComplete = true;
+            }
+        });
     }
 
     @Override
@@ -90,6 +126,7 @@ public class VideoActivity extends Activity implements CustomMediaController.Ful
         videoView.start();
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             public void onPrepared(MediaPlayer mp) {
+                Logger.d(TAG, " >> onPrepared");
                 boolean running = true;
                 final int duration = videoView.getDuration();
                 new Thread(new Runnable() {
@@ -116,30 +153,24 @@ public class VideoActivity extends Activity implements CustomMediaController.Ful
             }
         });
 
-        /*videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            int duration = 0;
-            int current = 0;
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                int time = 0;
-                duration = mediaPlayer.getDuration();
-                do {
-                    current = videoView.getCurrentPosition();
-                    Logger.d(TAG, ">> duration - " + duration + " current- " + current);
-                    try {
-                        //publishProgress((int) (current * 100 / duration));
-                        time = current*100/duration;
-                        Logger.d(TAG, ">> time " + String.valueOf(time));
-                        if(time >= 100){
-                            break;
-                        }
-                    } catch (Exception e) {
-                        Logger.e(TAG, e.getMessage());
-                    }
-                } while (time <= 100);
 
+        binding.bottomMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_home:
+                        break;
+                    case R.id.nav_feed:
+                        startActivity(new Intent(VideoActivity.this, FeedActivity.class));
+                        break;
+                    case R.id.profile_menu:
+                        break;
+                }
+
+                return false;
             }
-        });*/
+        });
+
     }
 
 
@@ -210,42 +241,5 @@ public class VideoActivity extends Activity implements CustomMediaController.Ful
         return false;
     }
 
-//    class VideoTime extends AsyncTask<Void, Integer, Void> {
-//        int duration = 0;
-//        int current = 0;
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            //videoView.start();
-//            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                @Override
-//                public void onPrepared(MediaPlayer mediaPlayer) {
-//                    duration = mediaPlayer.getDuration();
-//                    do {
-//                        current = videoView.getCurrentPosition();
-//                        Logger.d(TAG, ">> duration - " + duration + " current- " + current);
-//                        try {
-//                            publishProgress((int) (current * 100 / duration));
-//                            if(binding.videoProgress.getProgress() >= 100){
-//                                break;
-//                            }
-//                        } catch (Exception e) {
-//                            Logger.e(TAG, e.getMessage());
-//                        }
-//                    } while (binding.videoProgress.getProgress() <= 100);
-//
-//                }
-//            });
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            super.onProgressUpdate(values);
-//            System.out.println(values[0]);
-//            binding.videoProgress.setProgress(values[0]);
-//        }
-//
-//
-//    }
+
 }
