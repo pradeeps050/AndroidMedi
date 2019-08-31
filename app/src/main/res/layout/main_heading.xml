@@ -37,7 +37,6 @@
                     android:layout_height="155dp"
                     android:fitsSystemWindows="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_icon_elate"
                     app:mainImage="@{mainHeader.imageUrl}" />
 
                 <ImageView
