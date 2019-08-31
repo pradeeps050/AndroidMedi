@@ -173,11 +173,13 @@
     <color name="dot_light_screen3">#93c6fd</color>
     <color name="dot_light_screen4">#e4b5fc</color>
 
+    <color name="dark_grey">#a9a9a9</color>
+
     <array name="array_dot_active">
-        <item>@color/popup_grey</item>
-        <item>@color/popup_grey</item>
-        <item>@color/popup_grey</item>
-        <item>@color/popup_grey</item>
+        <item>@color/dark_grey</item>
+        <item>@color/dark_grey</item>
+        <item>@color/dark_grey</item>
+        <item>@color/dark_grey</item>
     </array>
 
     <array name="array_dot_inactive">

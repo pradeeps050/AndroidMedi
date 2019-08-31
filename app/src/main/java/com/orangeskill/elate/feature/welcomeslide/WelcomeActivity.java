@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +42,9 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         dotsLayout = findViewById(R.id.dots);
         btnSkip = findViewById(R.id.btn_skip);
-        btnSkip.setText(Html.fromHtml(getResources().getString(R.string.skip)));
+        SpannableString content = new SpannableString(getResources().getString(R.string.skip));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        btnSkip.setText(content);
         btnNext = findViewById(R.id.btn_next);
         btnNext.setVisibility(View.VISIBLE);
         layouts = new int[]{R.layout.welcome_slide_1, R.layout.welcome_slide_2, R.layout.welcome_slide_3,

@@ -61,7 +61,7 @@
     <string name="profile">Profile</string>
 
     <string name="slide1">A happier and healthier you!</string>
-    <string name="slide1_para">Yoga, Meditation\n Nutrition and Sleep.</string>
+    <string name="slide1_para">Yoga, Meditation,\n Nutrition, and Sleep.</string>
 
     <string name="slide2">Meditation</string>
     <string name="slide2_para">Learn the most effictive \n methods to do meditation.</string>
@@ -72,7 +72,7 @@
     <string name="slide4">Nutrition</string>
     <string name="slide4_para">Foods which are good\n for mind and body.</string>
 
-    <string name="next">Lets get started</string>
+    <string name="next">Let\'s get started</string>
     <string name="skip"><u>skip</u></string>
     <string name="start">GOT IT</string>
 
