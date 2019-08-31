@@ -6,17 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orangeskill.elate.R;
 import com.orangeskill.elate.feature.playlist.ui.therapy.data.model.Program;
 import com.orangeskill.elate.feature.session.data.ExpdListDataSource;
+import com.orangeskill.elate.framework.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ExpdListAdapter extends BaseExpandableListAdapter {
+    private static final String TAG = ExpdListAdapter.class.getSimpleName();
 
     private Context context;
     private ArrayList<ExpdListDataSource.Group> expandableListTitle;
@@ -46,7 +49,8 @@ public class ExpdListAdapter extends BaseExpandableListAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.expd_list_item, null);
         }
-        TextView expandedListTextView = (TextView) convertView.findViewById(R.id.subTitle);
+        TextView expandedListTextView = convertView.findViewById(R.id.subTitle);
+        expandedListTextView.setTypeface(null, Typeface.BOLD);
         expandedListTextView.setText(expandedListText.getName());
         return convertView;
     }
@@ -78,8 +82,16 @@ public class ExpdListAdapter extends BaseExpandableListAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.expd_list_group, null);
         }
-        TextView listTitleTextView = (TextView) convertView.findViewById(R.id.listTitle);
+        TextView listTitleTextView = convertView.findViewById(R.id.listTitle);
         TextView sessionText = convertView.findViewById(R.id.session_txt);
+        ImageView imageView = convertView.findViewById(R.id.right_arrow);
+        String tag = (String) convertView.getTag();
+        Logger.d(TAG, " tag >> " + tag + " pos > " + listPosition);
+        if (isExpanded) {
+            imageView.setImageResource(R.drawable.ic_down_side_arrow_button);
+        } else {
+            imageView.setImageResource(R.drawable.ic_right_side_arrow_button);
+        }
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(group.title);
         sessionText.setText(String.valueOf(group.size + " Session"));

@@ -29,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_below="@id/page_head"
             android:layout_above="@id/bottom_menu"
-            android:dividerHeight="0.5dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:groupIndicator="@null"
             android:visibility="gone"/>
 
 

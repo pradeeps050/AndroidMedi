@@ -78,10 +78,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Logger.d(TAG, " >> onPageSelected >> "  + position);
                 addBottomDots(position);
                 if (position == layouts.length - 1) {
-                    //btnNext.setText(getString(R.string.next));
                     dotsLayout.setVisibility(View.GONE);
                     btnNext.setVisibility(View.VISIBLE);
                     btnSkip.setVisibility(View.GONE);
@@ -99,7 +97,6 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void addBottomDots(int currentPage) {
-        Logger.d(TAG, ">> addBottomDots");
         dots = new TextView[layouts.length];
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);

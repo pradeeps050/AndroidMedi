@@ -56,6 +56,7 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
     private HashMap<ExpdListDataSource.Group, List<Program>> map;
     private ArrayList<ExpdListDataSource.Group> groupArrayList;
     private TherapySession therapySessions;
+    private boolean groupFlag = true;
 
 
     @Override
@@ -161,6 +162,8 @@ public class SessionActivity extends AppCompatActivity implements ItemClickListn
                         groupArrayList.add(iterator.next());
                     }
                     ExpdListAdapter adapter = new ExpdListAdapter(SessionActivity.this, groupArrayList, map);
+                    binding.expandableListView.setChildDivider(null);
+                    binding.expandableListView.setDivider(null);
                     binding.expandableListView.setAdapter(adapter);
                 }
             }
