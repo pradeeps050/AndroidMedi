@@ -45,7 +45,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/ic_back_button_round" />
+                    android:src="@drawable/back_round"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
